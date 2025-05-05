@@ -5,17 +5,18 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-# Ensure Java 17 is installed and active
-- task: UseJavaVersion@1
+# Install Java 17
+- task: JavaToolInstaller@0
   inputs:
     versionSpec: '17'
-    architecture: 'x64'
+    jdkArchitecture: 'x64'
+    jdkSourceOption: 'PreInstalled'
 
-# Optional: check Java version for debugging
+# Optional: confirm Java version
 - script: java -version
   displayName: 'Check Java Version'
 
-# Run Maven build
+# Build with Maven
 - task: Maven@3
   inputs:
     mavenPomFile: 'program6/pom.xml'
